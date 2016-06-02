@@ -112,19 +112,17 @@ public class PrefixMasker extends GenericUDF {
     if (!initialised) {
       getContext();
       initialised = true;
+      System.out.println("Called by privileged user: " + userIsPrivileged);
     }
-    System.out.println("Called by privileged user: " + userIsPrivileged);
+
     if (userIsPrivileged) {
-      LOG.info("Returning: " + arg);
       return arg;
     } else {
       int len = arg.length();
       if (len > 12) {
         String rest = arg.substring(12);
-        LOG.info("Returning: " + MASK_STRING + rest);
         return MASK_STRING + rest;
       } else {
-        LOG.info("Returning: " + MASK_STRING.substring(0, len));
         return MASK_STRING.substring(0, len);
       }
     }
