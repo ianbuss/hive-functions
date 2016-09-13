@@ -30,8 +30,13 @@ mvn clean package
 # Installing
 
 Place in the Hive Aux Jars path on the HiveServer2 node, restart HS2 and create a corresponding
-function in Beeline as follows:
+function in Beeline as the following example:
 
 ```
+-- create function as a member of a Sentry role with ALL on SERVER
+create function uuid as 'com.cloudera.fce.simple.UUIDUdf'
 
+-- use as anyone with SELECT on table foo
+select uuid() as uniqueid from foo;
 ```
+
