@@ -1,4 +1,4 @@
-package com.cloudera.fce;
+package com.cloudera.fce.generic;
 
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.hive.ql.exec.*;
@@ -112,7 +112,7 @@ public class PrefixMasker extends GenericUDF {
     if (!initialised) {
       getContext();
       initialised = true;
-      System.out.println("Called by privileged user: " + userIsPrivileged);
+      LOG.debug("Called by privileged user: " + userIsPrivileged);
     }
 
     if (userIsPrivileged) {
